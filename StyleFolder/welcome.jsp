@@ -4,13 +4,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Message Page</title>
+<title>Display Data</title>
 <style>
     body {
         font-family: 'Arial', sans-serif;
         margin: 0;
         padding: 0;
-        background-color: #eef2f7;
+        background-color: #f0f8ff;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -18,33 +18,26 @@
         color: #333;
     }
 
-    .container {
+    .message-container {
         text-align: center;
         background: #ffffff;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        padding: 40px;
-        max-width: 600px;
+        padding: 20px 30px;
+        max-width: 400px;
         width: 90%;
     }
 
-    h1 {
-        font-size: 2rem;
-        color: #2c3e50;
-        margin: 0;
-    }
-
-    p {
-        font-size: 1rem;
-        color: #7f8c8d;
-        margin-top: 15px;
+    .message-container font {
+        font-size: 1.2rem;
+        color: green;
+        font-weight: bold;
     }
 </style>
 </head>
 <body>
-<div class="container">
-    <h1>${message}</h1>
-    <p>If you need further assistance, please contact support.</p>
+<div class="message-container">
+    <font>${data}</font>
 </div>
 </body>
 </html>

@@ -48,6 +48,7 @@ public class UserController {
 		
 		if(objUser.getUserName().equals(dbusers.getUserName()) && objUser.getPassword().equals(dbusers.getPassword())){
 			
+			session.setAttribute("userName",objUser.getUserName());
 			return new ModelAndView("welcome","data","Welcome "+objUser.getUserName()+" to the Online shopping portal");
 		}
 		else {
