@@ -4,12 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Category</title>
 </head>
 <body>
-	<font color="red">${message}</font>
-	<br>
-	<a href="login">Try Again</a>
+<h1>This is Category</h1>
 
 </body>
 </html>

@@ -40,9 +40,21 @@ public class UserController {
 	@RequestMapping("/authenticate")
 	public ModelAndView validateUser(@ModelAttribute("objUser") Users objUser) {
 		
-//		Users dbusers = userDAO
+		Users dbusers = usersDAO.getUserDetails(objUser.getUserName());
+		if (dbusers == null) {
+		    return new ModelAndView("failure", "message", "User not found");
+		}
+
 		
-		return null;
+		if(objUser.getUserName().equals(dbusers.getUserName()) && objUser.getPassword().equals(dbusers.getPassword())){
+			
+			return new ModelAndView("welcome","data","Welcome "+objUser.getUserName()+" to the Online shopping portal");
+		}
+		else {
+			return new ModelAndView("failure","message","Invalid Authentication");
+			
+		}
+		
 //			if(objUser.getUserName().equals("cdac") && objUser.getPassword().equals("Acts")) {
 //				return new ModelAndView("welcome","data","Welcome" + objUser.getUserName() 
 //				+ "to the online shopping site");
@@ -51,6 +63,16 @@ public class UserController {
 //				return new ModelAndView("failure", "message", "Invalid Authentication");
 //			}
 		
+	}
+	
+	@RequestMapping("/register")
+	public ModelAndView registerUser(@ModelAttribute("objUser") Users objUser) {
+		
+		usersDAO.registerUser(objUser.getUserName(),
+				objUser.getPassword(),
+				objUser.getName(),
+				objUser.getEmail());
+		return new ModelAndView("login","logindata","Registration Successfull");
 	}
 	
 

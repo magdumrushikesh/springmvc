@@ -6,19 +6,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Login Page</title>
+<title>Register Page</title>
 </head>
 <body>
-	<font color="green">${logindata}</font>
-	<form:form action="authenticate" modelAttribute="objUser">
+	<form:form action="register" modelAttribute="objUser">
 	User name: <form:input path="userName" />
 		<br>
 	Password: <form:input path="password" />
 		<br>
-		<form:button value="submit">Login</form:button>
+	Name: <form:input path="name" />
+		<br>
+	Email: <form:input path="email" />
+		<br>
+		<form:button value="submit">Register</form:button>
 	</form:form>
 	
-	<a href="newUser">New User? Register</a>
+	<a href="login">Already User? Login</a>
 
 </body>
 </html>

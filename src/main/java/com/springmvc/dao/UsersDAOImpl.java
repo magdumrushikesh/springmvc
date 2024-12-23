@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +32,7 @@ public class UsersDAOImpl implements UsersDAO {
 		sqlRegister = env.getProperty("sql.register");
 		sqlChangePassword = env.getProperty("sql.chnagepassword");
 		sqlAllUser = env.getProperty("sql.alluser");
-		sqlUserDetails = env.getProperty("sql.userdetailss");
+		sqlUserDetails = env.getProperty("sql.userdetails");
 	}
 
 	@Override
@@ -48,8 +49,12 @@ public class UsersDAOImpl implements UsersDAO {
 
 	@Override
 	public Users getUserDetails(String userName) {
-
-		return null;
+		try {
+		return 
+		(Users)jdbcTemplate.queryForObject(sqlUserDetails, new UserRowMapper(),userName);
+				}catch (EmptyResultDataAccessException  e) {
+					return null;
+				}
 	}
 
 	
