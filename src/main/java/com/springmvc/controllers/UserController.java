@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.springjdbc.dao.UserDao;
 import com.springmvc.beans.Users;
+import com.springmvc.dao.UsersDAO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -16,7 +17,7 @@ import jakarta.servlet.http.HttpSession;
 public class UserController {
 	
 	@Autowired
-	UserDao userDAO;
+	UsersDAO usersDAO;
 	
 	@Autowired
 	HttpSession session;
@@ -39,7 +40,7 @@ public class UserController {
 	@RequestMapping("/authenticate")
 	public ModelAndView validateUser(@ModelAttribute("objUser") Users objUser) {
 		
-		Users dbusers = userDAO
+//		Users dbusers = userDAO
 		
 		return null;
 //			if(objUser.getUserName().equals("cdac") && objUser.getPassword().equals("Acts")) {

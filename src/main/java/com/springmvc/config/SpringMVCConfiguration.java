@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -13,12 +14,14 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import com.springjdbc.dao.UserDao;
-import com.springjdbc.dao.UserDaoImpl;
+import com.springmvc.dao.UsersDAO;
+import com.springmvc.dao.UsersDAOImpl;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.springmvc.controllers"})
+
+@ComponentScan(basePackages = {"com.springmvc.controllers","com.springmvc.beans"})
+@PropertySource("classpath:application.properties")
 public class SpringMVCConfiguration {
 	
 	@Autowired
@@ -46,8 +49,8 @@ public class SpringMVCConfiguration {
 	}
 	
 	@Bean
-	public UserDao userDao() {
-		return new UserDaoImpl();
+	public UsersDAO usersDAO() {
+		return new UsersDAOImpl();
 	}
 	
 	@Bean
