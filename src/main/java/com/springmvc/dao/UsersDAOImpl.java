@@ -36,9 +36,14 @@ public class UsersDAOImpl implements UsersDAO {
 	}
 
 	@Override
-	public boolean registerUser(String userName, String password, String name, String email) {
+	public boolean registerUser(String userName, String password, String name, String email) throws Exception {
+		try {
 		jdbcTemplate.update(sqlRegister, userName, password, name, email);
-		return true;
+		 return true;
+		}catch( Exception e){
+			throw new Exception(e.getMessage());
+		}
+		
 	}
 
 	@Override
@@ -48,12 +53,12 @@ public class UsersDAOImpl implements UsersDAO {
 	}
 
 	@Override
-	public Users getUserDetails(String userName) {
-//		try {
+	public Users getUserDetails(String userName) throws Exception {
+		try {
 			return (Users) jdbcTemplate.queryForObject(sqlUserDetails, new UserRowMapper(), userName);
-//		} catch (EmptyResultDataAccessException e) {
-//			return null;
-//		}
+		} catch (EmptyResultDataAccessException e) {
+			throw new Exception(e.getMessage());
+		}
 	}
 
 	@Override

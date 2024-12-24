@@ -25,10 +25,13 @@ public class UserController {
 	@Autowired
 	HttpSession session;
 	
-	@RequestMapping(method =RequestMethod.GET, value = "/login")
+	@RequestMapping("/login")
 	public void prepareUser(Model data) {
-		Users objUser = new Users();
-		data.addAttribute("objUser", objUser);
+		
+			Users objUser = new Users();
+			data.addAttribute("objUser", objUser);			
+		
+		
 		
 	}
 	
@@ -36,6 +39,17 @@ public class UserController {
 	public void prepareNewUser(Model data) {
 		Users objUser = new Users();
 		data.addAttribute("objUser", objUser);
+		
+	}
+	
+	@RequestMapping(method =RequestMethod.POST, value = "/newUser")
+	public String checkNewUser(@Valid @ModelAttribute("objUser") Users objUser, BindingResult result) {
+		if(result.hasErrors()) {
+			return "newUser";
+		}
+		else {
+			return "forward:register";
+		}
 		
 	}
 	
@@ -54,7 +68,13 @@ public class UserController {
 	@RequestMapping("/authenticate")
 	public ModelAndView validateUser(@ModelAttribute("objUser") Users objUser) {
 		
-		Users dbusers = usersDAO.getUserDetails(objUser.getUserName());
+		Users dbusers = null;
+		try {
+			dbusers = usersDAO.getUserDetails(objUser.getUserName());
+		} catch (Exception e) {
+			return new ModelAndView("error","errordata",e.getMessage()); 
+			
+		}
 		if (dbusers == null) {
 		    return new ModelAndView("failure", "message", "User not found");
 		}
@@ -83,10 +103,14 @@ public class UserController {
 	@RequestMapping("/register")
 	public ModelAndView registerUser(@ModelAttribute("objUser") Users objUser) {
 		
-		usersDAO.registerUser(objUser.getUserName(),
-				objUser.getPassword(),
-				objUser.getName(),
-				objUser.getEmail());
+		try {
+			usersDAO.registerUser(objUser.getUserName(),
+					objUser.getPassword(),
+					objUser.getName(),
+					objUser.getEmail());
+		} catch (Exception e) {
+			return new ModelAndView("error","errordata",e.getMessage()); 
+		}
 		return new ModelAndView("login","logindata","Registration Successfull");
 	}
 	

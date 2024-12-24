@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+errorPage="error.jsp"
+%>
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
@@ -85,7 +87,7 @@
 <body>
 <div class="container">
     <h1>Register Page</h1>
-    <form:form action="register" modelAttribute="objUser">
+    <form:form action="newUser" modelAttribute="objUser">
         <label for="userName">User Name:</label>
         <form:input path="userName" id="userName" /><form:errors path="userName" cssStyle="color:red"></form:errors>
 
