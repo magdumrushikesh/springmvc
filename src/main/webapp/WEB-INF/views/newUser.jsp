@@ -87,16 +87,16 @@
     <h1>Register Page</h1>
     <form:form action="register" modelAttribute="objUser">
         <label for="userName">User Name:</label>
-        <form:input path="userName" id="userName" />
+        <form:input path="userName" id="userName" /><form:errors path="userName" cssStyle="color:red"></form:errors>
 
         <label for="password">Password:</label>
-        <form:input path="password" id="password" type="password" />
+        <form:input path="password" id="password" type="password" /><form:errors path="password" cssStyle="color:red"></form:errors>
 
         <label for="name">Name:</label>
         <form:input path="name" id="name" />
 
         <label for="email">Email:</label>
-        <form:input path="email" id="email" type="email" />
+        <form:input path="email" id="email" type="email" /><form:errors path="email" cssStyle="color:red"></form:errors>
 
         <form:button value="submit">Register</form:button>
     </form:form>

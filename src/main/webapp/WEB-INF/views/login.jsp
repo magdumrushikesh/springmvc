@@ -92,12 +92,12 @@
 <div class="container">
     <h1>Login Page</h1>
     <div class="message">${logindata}</div>
-    <form:form action="authenticate" modelAttribute="objUser">
+    <form:form action="login" modelAttribute="objUser">
         <label for="userName">User Name:</label>
-        <form:input path="userName" id="userName" />
+        <form:input path="userName" id="userName" /><form:errors path="userName" cssStyle="color:red"></form:errors>
 
         <label for="password">Password:</label>
-        <form:input path="password" id="password" type="password" />
+        <form:input path="password" id="password" type="password" /><form:errors path="password" cssStyle="color:red"></form:errors>
 
         <form:button value="submit">Login</form:button>
     </form:form>

@@ -49,15 +49,13 @@ public class UsersDAOImpl implements UsersDAO {
 
 	@Override
 	public Users getUserDetails(String userName) {
-		try {
-		return 
-		(Users)jdbcTemplate.queryForObject(sqlUserDetails, new UserRowMapper(),userName);
-				}catch (EmptyResultDataAccessException  e) {
-					return null;
-				}
+//		try {
+			return (Users) jdbcTemplate.queryForObject(sqlUserDetails, new UserRowMapper(), userName);
+//		} catch (EmptyResultDataAccessException e) {
+//			return null;
+//		}
 	}
 
-	
 	@Override
 	public ArrayList<Users> getAllUser() {
 		return (ArrayList<Users>) jdbcTemplate.query(sqlAllUser, new UserRowMapper()).iterator();

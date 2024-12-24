@@ -19,47 +19,49 @@ import com.springmvc.dao.UsersDAOImpl;
 
 @Configuration
 @EnableWebMvc
-
-@ComponentScan(basePackages = {"com.springmvc.controllers","com.springmvc.beans"})
+@ComponentScan(basePackages = { "com.springmvc.controllers", "com.springmvc.beans" })
 @PropertySource("classpath:application.properties")
 public class SpringMVCConfiguration {
-	
+
 	@Autowired
 	Environment env;
 	
+	
+
 	@Bean
 	public DataSource dataSource() {
-		String driver=env.getProperty("db.connection.driverclass");
-		String url=env.getProperty("db.connection.url");
-		String user=env.getProperty("db.connection.username");
-		String pwd=env.getProperty("db.connection.password");
-		
-		DriverManagerDataSource ds= new DriverManagerDataSource();
+
+		String driver = env.getProperty("db.connection.driverclass");
+		String url = env.getProperty("db.connection.url");
+		String user = env.getProperty("db.connection.username");
+		String pwd = env.getProperty("db.connection.password");
+
+		DriverManagerDataSource ds = new DriverManagerDataSource();
 		ds.setDriverClassName(driver);
 		ds.setUrl(url);
 		ds.setUsername(user);
 		ds.setPassword(pwd);
 		return ds;
 	}
-	
+
 	@Bean
 	public JdbcTemplate jdbcTemplate(DataSource dataSource) {
 		return new JdbcTemplate(dataSource);
-		
+
 	}
-	
+
 	@Bean
 	public UsersDAO usersDAO() {
 		return new UsersDAOImpl();
 	}
-	
+
 	@Bean
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 		System.out.println("viewResolver");
 		viewResolver.setPrefix("/WEB-INF/views/");
 		viewResolver.setSuffix(".jsp");
-		
+
 		return viewResolver;
 	}
 
