@@ -3,15 +3,18 @@ package com.springmvc.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.springjdbc.dao.UserDao;
+
 import com.springmvc.beans.Users;
 import com.springmvc.dao.UsersDAO;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 public class UserController {
@@ -22,7 +25,7 @@ public class UserController {
 	@Autowired
 	HttpSession session;
 	
-	@RequestMapping("/login")
+	@RequestMapping(method =RequestMethod.GET, value = "/login")
 	public void prepareUser(Model data) {
 		Users objUser = new Users();
 		data.addAttribute("objUser", objUser);
@@ -37,6 +40,17 @@ public class UserController {
 	}
 	
 	
+	@RequestMapping(method =RequestMethod.POST, value = "/login")
+	public String checkUser(@Valid @ModelAttribute("objUser") Users objUser, BindingResult result) {
+		if(result.hasErrors()) {
+			return "login";
+		}
+		else {
+			return "forward:authenticate";
+		}
+	}
+	
+	
 	@RequestMapping("/authenticate")
 	public ModelAndView validateUser(@ModelAttribute("objUser") Users objUser) {
 		
@@ -48,7 +62,7 @@ public class UserController {
 		
 		if(objUser.getUserName().equals(dbusers.getUserName()) && objUser.getPassword().equals(dbusers.getPassword())){
 			
-			session.setAttribute("userName",objUser.getUserName());
+			//session.setAttribute("userName",objUser.getUserName());
 			return new ModelAndView("welcome","data","Welcome "+objUser.getUserName()+" to the Online shopping portal");
 		}
 		else {
